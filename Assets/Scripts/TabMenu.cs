@@ -5,6 +5,7 @@ using UnityEngine;
 public class TabMenu : MonoBehaviour
 {
 
+    public List<GameObject> m_resourceBoxes;
     Canvas m_canvas;
     void Start()
     {
