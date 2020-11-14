@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 #pragma warning disable 0168
 #pragma warning disable 0219
@@ -10,13 +12,18 @@ public class Resource
 {
     public string name;
     public float amount;
+    // copy constructor
+    public Resource(Resource _previousResource)
+    {
+        name = _previousResource.name;
+        amount = _previousResource.amount;
+    }
     public Resource(string _name, float _amount)
     {
         name = _name;
         amount = _amount;
     }
 }
-
 
 
 public class Brain : MonoBehaviour
@@ -52,12 +59,17 @@ public class Brain : MonoBehaviour
     }
     void InitializeResources() { 
         for (int idxTrader = 0; idxTrader < 8; idxTrader++) {
-            m_inventory.Add(new List<Resource>(resources));
+            List<Resource> resourceCopy = new List<Resource>(resources.Count);
+            resources.ForEach((item) =>
+            {
+                resourceCopy.Add( new Resource(item));
+            });
+            m_inventory.Add(resourceCopy);
             m_velocity.Add(0.0f);
 
 
             for (int idxResource = 0; idxResource < 8; idxResource++) {
-                m_inventory[idxTrader][idxResource].amount = Random.Range(0, 4.0f);
+                m_inventory[idxTrader][idxResource].amount = UnityEngine.Random.Range(0, 4.0f);
             }
         }
 
