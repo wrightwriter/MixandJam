@@ -58,7 +58,7 @@ public class Plane : MonoBehaviour
         }
 
         m_isGrounded = false;
-        m_isGrounded = Physics2D.OverlapCircle(m_groundCheck.transform.position, 0.2f, LayerMask.GetMask("baa"));
+        m_isGrounded = Physics2D.OverlapCircle(m_groundCheck.transform.position, 0.6f, LayerMask.GetMask("baa"));
     }
 
     void Update()
