@@ -103,6 +103,26 @@ public class Brain : MonoBehaviour
         }
         
     }
+    
+    public void DropItem( Vector2 _input)
+    {
+        if (m_playerCarrying.Count > 0)
+        {
+            int charIdx = (int)_input.x;
+            int resIdx = (int)_input.y;
+
+            for (int idxItem = m_playerCarrying.Count - 1; idxItem > 0; idxItem--)
+            {
+                if (m_playerCarrying[idxItem] == resIdx) { 
+                    m_inventory[charIdx][resIdx].amount++;
+                    m_playerCarrying.RemoveAt(idxItem);
+                    return;
+                }
+            }
+
+        }
+        
+    }
 
     void Update()
     {

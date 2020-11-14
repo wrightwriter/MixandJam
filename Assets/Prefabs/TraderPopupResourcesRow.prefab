@@ -279,6 +279,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9216c39fb19900745b7d088dfd0bde2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_resourceIdx: 0
+  m_brain: {fileID: 0}
+  m_traderPopup: {fileID: 0}
 --- !u!114 &8984414469166443541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,8 +300,8 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
+  m_Spacing: 14.47
+  m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
