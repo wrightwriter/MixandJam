@@ -6,8 +6,10 @@ public class Plane : MonoBehaviour
 {
     Rigidbody2D m_rigidBody2D;
     public Transform m_front;
+    public Transform m_groundCheck;
     public Transform m_up;
 
+    public bool m_isGrounded = false;
     public float m_planeVelocity = 1f;
     public float m_maxPlaneVelocity = 2f;
     Vector2 m_vel;
@@ -48,7 +50,11 @@ public class Plane : MonoBehaviour
             }
 
             //m_rigidBody2D.velocity = 
-        } 
+        }
+
+        ;
+        if (Physics2D.OverlapCircle(m_groundCheck.transform.position, 0.1f, LayerMask.NameToLayer("platforms")) != null)
+            m_isGrounded = true;
     }
 
     void Update()
