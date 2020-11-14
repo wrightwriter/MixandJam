@@ -1,6 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#pragma warning disable 0168
+#pragma warning disable 0219
+#pragma warning disable 0414 
+
+
 public class Resource
 {
     public string name;
@@ -43,25 +48,25 @@ public class Brain : MonoBehaviour
     void Start()
     {
         InitializeResources();
-        InvokeRepeating("Logic", 0.0f, 1.0f);
+        InvokeRepeating("Logic", 1.0f, 1.0f);
     }
     void InitializeResources() { 
         for (int idxTrader = 0; idxTrader < 8; idxTrader++) {
-            m_inventory[idxTrader] = new List<Resource>(resources);
-        }
-        for (int idxTrader = 0; idxTrader < 8; idxTrader++) {
-            m_velocity[idxTrader] = 0.0f;
-        }
+            m_inventory.Add(new List<Resource>(resources));
+            m_velocity.Add(0.0f);
 
-        for (int idxTrader = 0; idxTrader < 8; idxTrader++) {
+
             for (int idxResource = 0; idxResource < 8; idxResource++) {
                 m_inventory[idxTrader][idxResource].amount = Random.Range(0, 4.0f);
             }
         }
+
+
     }
 
     void Logic()
     {
+        Debug.Log("called brain logic");
         for (int idxTrader = 0; idxTrader < 8; idxTrader++) {
             m_velocity[idxTrader] = Mathf.PerlinNoise(Time.fixedTime*0.05f + idxTrader*200f, 0.1f)  + 0.2f;
             m_inventory[idxTrader][idxTrader].amount += m_velocity[idxTrader] * 0.1f;
