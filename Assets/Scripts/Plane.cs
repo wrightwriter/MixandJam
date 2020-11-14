@@ -27,24 +27,32 @@ public class Plane : MonoBehaviour
         m_dir = (m_front.position - transform.position).normalized;
         m_dirUp = (m_up.position - transform.position).normalized;
 
-        m_vel = m_dir;
-        m_vel += m_dirUp * m_input.x*1f;
+        m_vel = m_dir + Vector2.up * 0.2f * m_rigidBody2D.velocity.magnitude / m_maxPlaneVelocity;
+        m_vel += m_dirUp * m_input.x * 1.2f;
 
         if (m_input.x != 0f)
         {
-            transform.Rotate(new Vector3(0, 0, -m_input.x*(m_input.y != 0 ? 100f : 60f)*Time.fixedDeltaTime));
+            transform.Rotate(new Vector3(0, 0, -m_input.x * (m_input.y != 0 ? 100f : 60f) * Time.fixedDeltaTime));
             transform.GetComponent<SpriteRenderer>().flipY = (transform.eulerAngles.z <= 270 && transform.eulerAngles.z >= 90);
         }
 
-        m_rigidBody2D.gravityScale = Mathf.Lerp(0.0005f,0.2f,m_rigidBody2D.velocity.magnitude);
+        m_rigidBody2D.gravityScale = Mathf.Lerp(0.0005f, 0.2f, m_rigidBody2D.velocity.magnitude);
 
-        m_vel *= m_planeVelocity*m_input.y;
+        m_vel *= m_planeVelocity * m_input.y;
         m_vel *= Time.fixedDeltaTime;
         m_rigidBody2D.velocity += m_vel;
 
-        if( m_rigidBody2D.velocity.magnitude >= m_maxPlaneVelocity)
+
+        //rotates volocity to match sprite
+        Vector3 sprite_forwards = new Vector3(Mathf.Cos(transform.eulerAngles.z), Mathf.Sin(transform.eulerAngles.z), 0);
+        float singleStep = .4f * Time.fixedDeltaTime;
+        m_rigidBody2D.velocity = Vector3.RotateTowards(m_rigidBody2D.velocity, sprite_forwards, singleStep, 0.0f);
+
+
+
+        if (m_rigidBody2D.velocity.magnitude >= m_maxPlaneVelocity)
         {
-            m_rigidBody2D.velocity = m_rigidBody2D.velocity.normalized*m_maxPlaneVelocity;
+            m_rigidBody2D.velocity = m_rigidBody2D.velocity.normalized * m_maxPlaneVelocity;
         }
 
         if (Physics2D.OverlapCircle(m_groundCheck.transform.position, 0.1f, LayerMask.NameToLayer("platforms")) != null)
@@ -57,6 +65,8 @@ public class Plane : MonoBehaviour
     }
     void DoInput()
     {
-        m_input = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
+        m_input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 }
+
+
