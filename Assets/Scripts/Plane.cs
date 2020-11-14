@@ -10,8 +10,8 @@ public class Plane : MonoBehaviour
     public Transform m_up;
 
     public bool m_isGrounded = false;
-    public float m_planeVelocity = 1f;
-    public float m_maxPlaneVelocity = 2f;
+    public float m_planeVelocity = 100f;
+    public float m_maxPlaneVelocity = 500f;
     Vector2 m_vel;
     Vector2 m_dir;
     Vector2 m_dirUp;
@@ -27,32 +27,26 @@ public class Plane : MonoBehaviour
         m_dir = (m_front.position - transform.position).normalized;
         m_dirUp = (m_up.position - transform.position).normalized;
 
-        if (m_input.y != 0.0f)
+        m_vel = m_dir;
+        m_vel += m_dirUp * m_input.x*1f;
+
+        if (m_input.x != 0f)
         {
-            m_vel = m_dir;
-            m_vel += m_dirUp * m_input.x*1f;
-
-            if (m_input.x != 0f)
-            {
-                transform.Rotate(new Vector3(0, 0, -m_input.x*100f*Time.fixedDeltaTime));
-                if (Mathf.Round(transform.eulerAngles.z) == 180) { transform.Rotate(new Vector3(0, 0, -180)); }
-            }
-
-            m_rigidBody2D.gravityScale = Mathf.Lerp(1.0f,0.05f,m_rigidBody2D.velocity.magnitude);
-
-            m_vel *= m_planeVelocity*m_input.y;
-            m_vel *= Time.fixedDeltaTime;
-            m_rigidBody2D.velocity += m_vel;
-
-            if( m_rigidBody2D.velocity.magnitude >= m_maxPlaneVelocity)
-            {
-                m_rigidBody2D.velocity = m_rigidBody2D.velocity.normalized*m_maxPlaneVelocity;
-            }
-
-            //m_rigidBody2D.velocity = 
+            transform.Rotate(new Vector3(0, 0, -m_input.x*(m_input.y != 0 ? 100f : 60f)*Time.fixedDeltaTime));
+            transform.GetComponent<SpriteRenderer>().flipY = (transform.eulerAngles.z <= 270 && transform.eulerAngles.z >= 90);
         }
 
-        ;
+        m_rigidBody2D.gravityScale = Mathf.Lerp(0.0005f,0.2f,m_rigidBody2D.velocity.magnitude);
+
+        m_vel *= m_planeVelocity*m_input.y;
+        m_vel *= Time.fixedDeltaTime;
+        m_rigidBody2D.velocity += m_vel;
+
+        if( m_rigidBody2D.velocity.magnitude >= m_maxPlaneVelocity)
+        {
+            m_rigidBody2D.velocity = m_rigidBody2D.velocity.normalized*m_maxPlaneVelocity;
+        }
+
         if (Physics2D.OverlapCircle(m_groundCheck.transform.position, 0.1f, LayerMask.NameToLayer("platforms")) != null)
             m_isGrounded = true;
     }
