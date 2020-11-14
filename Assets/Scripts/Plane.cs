@@ -34,14 +34,14 @@ public class Plane : MonoBehaviour
         if (m_input.x != 0f)
         {
             transform.Rotate(new Vector3(0, 0, -m_input.x * (m_input.y != 0 ? 100f : 60f) * Time.fixedDeltaTime));
-            /*
+
             if (m_isGrounded)
                 gameObject.GetComponent<SpriteRenderer>().sprite = sprites[2];
             else if (transform.eulerAngles.z >= 245 && transform.eulerAngles.z <= 295 || transform.eulerAngles.z >= 65 && transform.eulerAngles.z <= 115)
                 gameObject.GetComponent<SpriteRenderer>().sprite = sprites[1];
             else
                 gameObject.GetComponent<SpriteRenderer>().sprite = sprites[0];
-            */
+
             transform.GetComponent<SpriteRenderer>().flipY = (transform.eulerAngles.z <= 270 && transform.eulerAngles.z >= 90);
         }
 
@@ -66,6 +66,7 @@ public class Plane : MonoBehaviour
 
     void Update()
     {
+        GetComponent<AudioSource>().volume = m_rigidBody2D.velocity.magnitude;
         DoInput();
     }
     void DoInput()
