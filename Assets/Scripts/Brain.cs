@@ -78,10 +78,9 @@ public class Brain : MonoBehaviour
 
     void Logic()
     {
-        Debug.Log("called brain logic");
         for (int idxTrader = 0; idxTrader < 8; idxTrader++) {
-            m_velocity[idxTrader] = Mathf.PerlinNoise(Time.fixedTime*0.05f + idxTrader*200f, 0.1f)  + 0.2f;
-            m_inventory[idxTrader][idxTrader].amount += m_velocity[idxTrader] * 0.1f;
+            m_velocity[idxTrader] = Mathf.PerlinNoise(Time.fixedTime*0.05f + idxTrader*200f, 0.1f)  + 0.1f;
+            m_inventory[idxTrader][idxTrader].amount += m_velocity[idxTrader] * 0.05f;
         }
 
     }

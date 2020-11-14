@@ -55,7 +55,7 @@ public class Plane : MonoBehaviour
             m_rigidBody2D.velocity = m_rigidBody2D.velocity.normalized * m_maxPlaneVelocity;
         }
 
-        if (Physics2D.OverlapCircle(m_groundCheck.transform.position, 0.1f, LayerMask.NameToLayer("platforms")) != null)
+        if (Physics2D.OverlapCircle(m_groundCheck.transform.position, 0.5f, LayerMask.NameToLayer("platforms")) != null)
             m_isGrounded = true;
     }
 

@@ -7,10 +7,9 @@ public class TraderPopup : MonoBehaviour
     Trader m_trader;
     void Start()
     {
-        
+        gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
