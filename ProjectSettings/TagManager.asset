@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Back-Buildings
+    uniqueID: 4084964045
+    locked: 0
+  - name: Mid-Platforms
+    uniqueID: 2915961055
+    locked: 0
+  - name: Front-Plane
+    uniqueID: 1310699033
+    locked: 0

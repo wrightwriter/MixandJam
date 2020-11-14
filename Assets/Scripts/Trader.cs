@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class Trader : MonoBehaviour
 {
-    public TraderPopup m_traderPopup;
+    public GameObject m_traderPopup;
     void Start()
     {
-        
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        Plane plane = collision.gameObject.GetComponent<Plane>();
-
-        if (plane.m_isGrounded && collision.otherRigidbody.velocity.magnitude < 0.1f)
+        Plane plane = collider.gameObject.GetComponent<Plane>();
+        if (plane != null)
         {
-            m_traderPopup.gameObject.SetActive(true);
+            if (plane.m_isGrounded && collider.attachedRigidbody.velocity.magnitude < 0.1f)
+            {
+                m_traderPopup.SetActive(true);
+            }
         }
+
     }
 
     void Update()
