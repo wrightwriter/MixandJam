@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Plane : MonoBehaviour
 {
+    public Sprite[] sprites;
     Rigidbody2D m_rigidBody2D;
     public Transform m_front;
     public Transform m_groundCheck;
@@ -33,6 +34,12 @@ public class Plane : MonoBehaviour
         if (m_input.x != 0f)
         {
             transform.Rotate(new Vector3(0, 0, -m_input.x * (m_input.y != 0 ? 100f : 60f) * Time.fixedDeltaTime));
+            if (m_isGrounded)
+                gameObject.GetComponent<SpriteRenderer>().sprite = sprites[2];
+            else if (transform.eulerAngles.z >= 245 && transform.eulerAngles.z <= 295 || transform.eulerAngles.z >= 65 && transform.eulerAngles.z <= 115)
+                gameObject.GetComponent<SpriteRenderer>().sprite = sprites[1];
+            else
+                gameObject.GetComponent<SpriteRenderer>().sprite = sprites[0];
             transform.GetComponent<SpriteRenderer>().flipY = (transform.eulerAngles.z <= 270 && transform.eulerAngles.z >= 90);
         }
 
@@ -41,13 +48,6 @@ public class Plane : MonoBehaviour
         m_vel *= m_planeVelocity * m_input.y;
         m_vel *= Time.fixedDeltaTime;
         m_rigidBody2D.velocity += m_vel;
-
-
-        //rotates volocity to match sprite
-        Vector3 sprite_forwards = new Vector3(Mathf.Cos(transform.eulerAngles.z), Mathf.Sin(transform.eulerAngles.z), 0);
-        float singleStep = .4f * Time.fixedDeltaTime;
-        m_rigidBody2D.velocity = Vector3.RotateTowards(m_rigidBody2D.velocity, sprite_forwards, singleStep, 0.0f);
-
 
 
         if (m_rigidBody2D.velocity.magnitude >= m_maxPlaneVelocity)

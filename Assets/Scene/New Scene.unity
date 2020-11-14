@@ -700,6 +700,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ac570def59ea741ab071e5e9178d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: bdffe962d6bd1f245a0cb88c4c1a25ef, type: 3}
+  - {fileID: 21300000, guid: 7cfcdbc7b46e6dd4ca2bdeff1f0eee1f, type: 3}
+  - {fileID: 21300000, guid: b5cee147e85cb714d874d4b71bed9f11, type: 3}
   m_front: {fileID: 10103689}
   m_groundCheck: {fileID: 1731837427}
   m_up: {fileID: 1216185276}
@@ -720,8 +724,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -834,7 +838,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Time: 5
   m_Parameters:
     serializedVersion: 3
@@ -900,7 +904,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 1
-  m_Emitting: 0
+  m_Emitting: 1
 --- !u!4 &359020924 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9185506432400620068, guid: 545efab9ff2b89443b48184c7410938e, type: 3}
@@ -1595,11 +1599,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.51
+      value: 11.29
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.0500002
+      value: -1.08
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1652,11 +1656,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.96
+      value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.08
+      value: 6.14
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1739,7 +1743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.1
+      value: 11.94
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2136,11 +2140,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.17
+      value: 16.7
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.0499997
+      value: 5.02
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2193,11 +2197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.95
+      value: -8.38
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.289999
+      value: 11.34
       objectReference: {fileID: 0}
     - target: {fileID: 163027601007717235, guid: 897c6f022b18eb84e8aeaf7f5f46f443, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2596,7 +2600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1595374662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2609,7 +2613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c3496b36daeac41821525af0273c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloudObject: {fileID: 0}
+  cloudObject: {fileID: 5728185135336397326, guid: e2b16b3a9148c0e4fba75f9c7f5190fb, type: 3}
 --- !u!4 &1595374663
 Transform:
   m_ObjectHideFlags: 0
