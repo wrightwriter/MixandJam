@@ -50,6 +50,7 @@ public class Brain : MonoBehaviour
     [System.NonSerialized] public List<float> m_velocity = new List<float>();
 
     public List<GameObject> m_traders;
+    public List<int> m_playerCarrying;
     public GameObject m_player;
 
 
@@ -86,8 +87,20 @@ public class Brain : MonoBehaviour
 
     }
 
-    public void CarryItem()
+    public void CarryItem( Vector2 _input)
     {
+        if (m_playerCarrying.Count < 4)
+        {
+            int charIdx = (int)_input.x;
+            int resIdx = (int)_input.y;
+
+            if (m_inventory[charIdx][resIdx].amount >= 1.0f)
+            {
+                m_playerCarrying.Add(resIdx);
+                m_inventory[charIdx][resIdx].amount--;
+            }
+
+        }
         
     }
 

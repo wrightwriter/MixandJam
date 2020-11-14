@@ -16,10 +16,13 @@ public class Trader : MonoBehaviour
         Plane plane = collider.gameObject.GetComponent<Plane>();
         if (plane != null)
         {
-            if (plane.m_isGrounded && collider.attachedRigidbody.velocity.magnitude < 0.1f)
+            if (plane.m_isGrounded && collider.attachedRigidbody.velocity.magnitude < 0.5f)
             {
-                m_traderPopup.SetActive(true);
-                m_traderPopup.GetComponent<TraderPopup>();
+                m_traderPopup.GetComponent<TraderPopup>().Show();
+                m_traderPopup.GetComponent<TraderPopup>().m_currIdx = idx;
+            } else
+            {
+                m_traderPopup.GetComponent<TraderPopup>().Hide();
             }
         }
 
