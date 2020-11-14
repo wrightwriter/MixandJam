@@ -50,6 +50,7 @@ public class Brain : MonoBehaviour
     [System.NonSerialized] public List<float> m_velocity = new List<float>();
 
     public List<GameObject> m_traders;
+    public GameObject m_player;
 
 
     void Start()
@@ -83,6 +84,11 @@ public class Brain : MonoBehaviour
             m_inventory[idxTrader][idxTrader].amount += m_velocity[idxTrader] * 0.05f;
         }
 
+    }
+
+    public void CarryItem()
+    {
+        
     }
 
     void Update()

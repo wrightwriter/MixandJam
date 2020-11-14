@@ -5,6 +5,7 @@ using UnityEngine;
 public class Trader : MonoBehaviour
 {
     public GameObject m_traderPopup;
+    public int idx = 0;
     void Start()
     {
     }
@@ -18,6 +19,7 @@ public class Trader : MonoBehaviour
             if (plane.m_isGrounded && collider.attachedRigidbody.velocity.magnitude < 0.1f)
             {
                 m_traderPopup.SetActive(true);
+                m_traderPopup.GetComponent<TraderPopup>();
             }
         }
 
