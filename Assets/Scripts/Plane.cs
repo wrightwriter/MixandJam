@@ -59,11 +59,12 @@ public class Plane : MonoBehaviour
 
         m_isGrounded = false;
         m_isGrounded = Physics2D.OverlapCircle(m_groundCheck.transform.position, 0.6f, LayerMask.GetMask("baa"));
+
+        GetComponent<AudioSource>().volume = Mathf.Lerp(GetComponent<AudioSource>().volume, Mathf.Abs(m_input.y), 2.0f*Time.fixedDeltaTime  ) ;
     }
 
     void Update()
     {
-        GetComponent<AudioSource>().volume = m_rigidBody2D.velocity.magnitude;
         DoInput();
     }
     void DoInput()
