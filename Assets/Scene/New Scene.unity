@@ -4183,7 +4183,7 @@ GameObject:
   - component: {fileID: 827442737}
   m_Layer: 5
   m_Name: Notification
-  m_TagString: Untagged
+  m_TagString: Notifications
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4243,22 +4243,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character_sprites:
-  - {fileID: 21300000, guid: 6890d7196640e524ea579a11b94116ba, type: 3}
   - {fileID: 21300000, guid: 41ec1b175c83bec4a8107747134dd39c, type: 3}
+  - {fileID: 21300000, guid: 0bfef932ad4bb47498ce752c37a4057c, type: 3}
   - {fileID: 21300000, guid: 0bfef932ad4bb47498ce752c37a4057c, type: 3}
   - {fileID: 21300000, guid: c319da2fc7b4d984cbc1354b518938f9, type: 3}
   - {fileID: 21300000, guid: 66282f64de81b27439db19645a92c8c4, type: 3}
   - {fileID: 21300000, guid: 5963ee12161e2a4449b67a61f1a74d64, type: 3}
+  - {fileID: 21300000, guid: 6890d7196640e524ea579a11b94116ba, type: 3}
   - {fileID: 21300000, guid: d3167a9fbd679374ea6848170efe2f2d, type: 3}
   character_notif_sounds:
-  - {fileID: 8300000, guid: a4b4f37347e14974ebcd09a9b532a6fb, type: 3}
   - {fileID: 8300000, guid: a4ab6d03439bcc0489849458f56f6187, type: 3}
   - {fileID: 8300000, guid: cff8dad11062fe340ad6427b205fd61d, type: 3}
+  - {fileID: 8300000, guid: 044d8f1563179dc4a9cb0545e4bf318a, type: 3}
   - {fileID: 8300000, guid: 30d9973afdc0c3b4693332f5f6180590, type: 3}
   - {fileID: 8300000, guid: 8313396ca8f9324428ad422ba0ad8070, type: 3}
   - {fileID: 8300000, guid: e511f2e95b7e37d40938883d84b4f8e1, type: 3}
+  - {fileID: 8300000, guid: a4b4f37347e14974ebcd09a9b532a6fb, type: 3}
   - {fileID: 8300000, guid: 05f31993c089e4e4b99cb92c1f677e2d, type: 3}
-  - {fileID: 8300000, guid: 044d8f1563179dc4a9cb0545e4bf318a, type: 3}
   notif_animator: {fileID: 827442735}
   notif_text: {fileID: 1187080762}
   notif_character_icon: {fileID: 85273041}

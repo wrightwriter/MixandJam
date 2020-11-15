@@ -30,12 +30,6 @@ public class NotificationHandler : MonoBehaviour
     private void Start()
     {
         notifs = new List<Notification>();
-
-
-        for(int i = 0; i < 8; i++)
-        {
-            notifs.Add(new Notification(i, "Hey"));
-        }
     }
 
     // Update is called once per frame
@@ -60,6 +54,10 @@ public class NotificationHandler : MonoBehaviour
         }
     }
 
+    public void SendNotification(int Sender, string Text)
+    {
+        notifs.Add(new Notification(Sender, Text));
+    }
 
     void CallNotification(int Sender, string Text)
     {
