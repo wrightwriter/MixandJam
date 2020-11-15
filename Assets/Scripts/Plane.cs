@@ -68,7 +68,7 @@ public class Plane : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space) && m_plane_fuel > 0)
         {
-            m_plane_fuel -= 25 * Time.deltaTime;
+            m_plane_fuel -= 50 * Time.deltaTime;
             boost_slider.value = m_plane_fuel;
             m_maxPlaneVelocity = start_maxVelocity * 3;
             m_planeVelocity = start_accel * 3;
