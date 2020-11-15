@@ -9,6 +9,7 @@ public class Plane : MonoBehaviour
     public Transform m_front;
     public Transform m_groundCheck;
     public Transform m_up;
+    public GameObject minimap_plane;
 
     public bool m_isGrounded = false;
     public float m_planeVelocity = 100f;
@@ -44,13 +45,23 @@ public class Plane : MonoBehaviour
             transform.Rotate(new Vector3(0, 0, -m_input.x * (m_input.y != 0 ? 100f : 60f) * Time.fixedDeltaTime));
 
             if (m_isGrounded)
+            {
                 gameObject.GetComponent<SpriteRenderer>().sprite = sprites[2];
+                minimap_plane.GetComponent<SpriteRenderer>().sprite = sprites[2];
+            }
             else if (transform.eulerAngles.z >= 245 && transform.eulerAngles.z <= 295 || transform.eulerAngles.z >= 65 && transform.eulerAngles.z <= 115)
+            {
                 gameObject.GetComponent<SpriteRenderer>().sprite = sprites[1];
+                minimap_plane.GetComponent<SpriteRenderer>().sprite = sprites[1];
+            }
             else
+            {
                 gameObject.GetComponent<SpriteRenderer>().sprite = sprites[0];
+                minimap_plane.GetComponent<SpriteRenderer>().sprite = sprites[0];
+            }
 
             transform.GetComponent<SpriteRenderer>().flipY = (transform.eulerAngles.z <= 270 && transform.eulerAngles.z >= 90);
+            minimap_plane.GetComponent<SpriteRenderer>().flipY = (transform.eulerAngles.z <= 270 && transform.eulerAngles.z >= 90);
         }
 
         m_rigidBody2D.gravityScale = Mathf.Lerp(0.0005f, 0.2f, m_rigidBody2D.velocity.magnitude);
