@@ -7,6 +7,8 @@ public class TraderPopup : MonoBehaviour
 {
     Trader m_trader;
     public Brain m_brain;
+    public AudioClip m_pickupItem;
+    public AudioClip m_dropItem;
     public GameObject m_resourceBox;
     public int m_currIdx;
     
@@ -21,16 +23,11 @@ public class TraderPopup : MonoBehaviour
         {
             Transform ResourceRow = m_resourceBox.transform.GetChild(idxResourceRow);
 
-            GameObject ResourceFirstBox = ResourceRow.transform.GetChild(0).gameObject;
-            GameObject ResourceSecondBox = ResourceRow.transform.GetChild(1).gameObject;
-            GameObject ResourceThirdBox = ResourceRow.transform.GetChild(2).gameObject;
-            GameObject ResourceFourthBox = ResourceRow.transform.GetChild(3).gameObject;
+            GameObject ResourceImage = ResourceRow.transform.GetChild(0).gameObject;
+            GameObject Text = ResourceRow.transform.GetChild(1).gameObject;
+            Text.GetComponent<TMPro.TextMeshProUGUI>().text = ((int)m_brain.m_inventory[idxCharacter][idxResourceRow].amount).ToString();
 
-            ResourceFirstBox.SetActive(m_brain.m_inventory[idxCharacter][idxResourceRow].amount > 1.0f);
-            ResourceSecondBox.SetActive(m_brain.m_inventory[idxCharacter][idxResourceRow].amount > 2.0f);
-            ResourceThirdBox.SetActive(m_brain.m_inventory[idxCharacter][idxResourceRow].amount > 3.0f);
-            ResourceFourthBox.SetActive(m_brain.m_inventory[idxCharacter][idxResourceRow].amount > 4.0f);
-
+            //ResourceImage.SetActive(m_brain.m_inventory[idxCharacter][idxResourceRow].amount > 1.0f);
         }
     }
 
