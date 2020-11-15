@@ -85,6 +85,23 @@ public class Brain : MonoBehaviour
 
     }
 
+    public void KillChar( int idxChar)
+    {
+        m_charAlive[idxChar] = false;
+        m_director.m_needs[idxChar].Clear();
+
+        GameObject.FindGameObjectWithTag("Notifications").GetComponent<NotificationHandler>().SendNotification(idxChar, new string[]{
+            "Ah no, they found me out!",
+            "Nooo! My prized lemonade stand is going down! ",
+            "Oh no! They got me!",
+            "Remember Compatriot: Courage is a person's most imporat attribute.",
+            "Dammit, I got shot down.",
+            "I'm going down but I still believe in you!",
+            "I'm falling! Oh dearest, all my berries are gonna be ruined!",
+            "Snap! Looks like my shop got detonated."
+        }[idxChar]);
+        m_traders[idxChar].GetComponent<Trader>().Die();
+    }
     public void PickupOrDropItemFromTrader( TraderPopupMessage _input)
     {
 

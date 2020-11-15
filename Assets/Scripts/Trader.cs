@@ -8,11 +8,31 @@ public class Trader : MonoBehaviour
     public GameObject m_traderPopup;
     public int idx = 0;
     private bool visited = false;
+    AudioSource m_audioSourceDie;
     void Start()
     {
     }
 
+    /*
+    public void Die()
+    {
+        m_audioSourceDie.PlayOneShot(m_audioSourceDie.clip);
 
+        gca
+    }
+    */
+
+    public void Die()
+    {
+        m_audioSourceDie.PlayOneShot(m_audioSourceDie.clip);
+        float t = Time.time;
+        // wait 5s
+        //yield return new WaitUntil(() => Time.time > t + 2f);
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        transform.position += new Vector3(2000f,2000f, 2000f);
+        
+    }
     private void OnTriggerStay2D(Collider2D collider)
     {
 
