@@ -4230,7 +4230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 242, y: -158}
+  m_AnchoredPosition: {x: 226.5, y: -134.4}
   m_SizeDelta: {x: 384, y: 216}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &561661767
@@ -4834,6 +4834,7 @@ MonoBehaviour:
   notif_character_icon: {fileID: 85273041}
   notif_sound_source: {fileID: 827442737}
   main_sound_source: {fileID: 2025889837}
+  minimap_image: {fileID: 561661767}
 --- !u!82 &827442737
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5918,7 +5919,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1317165789}
   - component: {fileID: 1317165788}
-  - component: {fileID: 1317165787}
   m_Layer: 0
   m_Name: MiniMapCam
   m_TagString: Untagged
@@ -5926,14 +5926,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1317165787
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1317165786}
-  m_Enabled: 1
 --- !u!20 &1317165788
 Camera:
   m_ObjectHideFlags: 0

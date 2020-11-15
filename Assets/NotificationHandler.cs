@@ -24,11 +24,14 @@ public class NotificationHandler : MonoBehaviour
     public Image notif_character_icon;
     public AudioSource notif_sound_source;
     public AudioSource main_sound_source;
+    public RawImage minimap_image;
     private float notif_countdown;
     private List<Notification> notifs;
 
     private void Start()
     {
+        minimap_image.texture.width = (int)(Screen.width * 0.15f);
+        minimap_image.texture.height = (int)(Screen.height * 0.15f);
         notifs = new List<Notification>();
     }
 
