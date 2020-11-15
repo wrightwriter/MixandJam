@@ -8,6 +8,23 @@ using UnityEngine;
 #pragma warning disable 0414 
 
 
+public class Resource
+{
+    public string name;
+    public float amount;
+    // copy constructor
+    public Resource(Resource _previousResource)
+    {
+        name = _previousResource.name;
+        amount = _previousResource.amount;
+    }
+    public Resource(string _name, float _amount)
+    {
+        name = _name;
+        amount = _amount;
+    }
+}
+
 
 public class Brain : MonoBehaviour
 {
@@ -31,22 +48,19 @@ public class Brain : MonoBehaviour
     };
     [System.NonSerialized] public List<List<Resource>> m_inventory = new List<List<Resource>>();
     [System.NonSerialized] public List<float> m_velocity = new List<float>();
-    [System.NonSerialized] public List<bool> m_charAlive = new List<bool>();
-    
+    [System.NonSerialized] public List<int> m_needs = new List<int>();
 
     public List<GameObject> m_traders;
-    [System.NonSerialized] public List<int> m_playerCarrying = new List<int>();
+    public List<int> m_playerCarrying;
     public GameObject m_player;
-    public Director m_director;
-    public TraderPopup m_traderPopup;
 
 
     void Start()
     {
-        Initialize();
+        InitializeResources();
         InvokeRepeating("Logic", 1.0f, 1.0f);
     }
-    void Initialize() { 
+    void InitializeResources() { 
         for (int idxTrader = 0; idxTrader < 8; idxTrader++) {
 
             List<Resource> resourceCopy = new List<Resource>(resources.Count);
@@ -62,7 +76,7 @@ public class Brain : MonoBehaviour
                 m_inventory[idxTrader][idxResource].amount = UnityEngine.Random.Range(0, 4.0f);
             }
 
-            m_charAlive.Add(true);
+            m_needs[idxTrader] = 0;
         }
 
 
@@ -73,85 +87,49 @@ public class Brain : MonoBehaviour
         for (int idxTrader = 0; idxTrader < 8; idxTrader++) {
             m_velocity[idxTrader] = Mathf.PerlinNoise(Time.fixedTime*0.05f + idxTrader*200f, 0.1f)  + 0.1f;
             m_inventory[idxTrader][idxTrader].amount += m_velocity[idxTrader] * 0.05f;
-
-            UnityEngine.Random.State prevRandState = UnityEngine.Random.state;
-            UnityEngine.Random.InitState(1111111);
-            for (int idxResource = 0; idxResource < 8; idxResource++) {
-                Mathf.PerlinNoise( idxTrader * 100.0f, idxResource * 2.0f + 0.1f * Time.time*(0.5f + UnityEngine.Random.Range(0f,1f)));
-            }
-            UnityEngine.Random.state = prevRandState;
-
         }
 
     }
 
-    public void PickupOrDropItemFromTrader( TraderPopupMessage _input)
+    public void CarryItem( Vector2 _input)
     {
-
-        int charIdx = (int)_input.traderIdx;
-        int resIdx = (int)_input.resourceIdx;
-        if (_input.pickupOrDrop == "pickup")
+        if (m_playerCarrying.Count < 4)
         {
+            int charIdx = (int)_input.x;
+            int resIdx = (int)_input.y;
 
-            if (m_playerCarrying.Count < 4)
+            if (m_inventory[charIdx][resIdx].amount >= 1.0f)
             {
-
-                if (m_inventory[charIdx][resIdx].amount >= 1.0f)
-                {
-                    m_playerCarrying.Add(resIdx);
-                    m_inventory[charIdx][resIdx].amount--;
-
-                    m_traderPopup.GetComponent<AudioSource>().clip = m_traderPopup.m_pickupItem;
-                    m_traderPopup.GetComponent<AudioSource>().Play();
-                }
-
+                m_playerCarrying.Add(resIdx);
+                m_inventory[charIdx][resIdx].amount--;
             }
-        } else
-        {
-            if (m_playerCarrying.Count > 0)
-            {
-                for (int idxItem = 0; idxItem < m_playerCarrying.Count; idxItem++)
-                {
-                    if (m_playerCarrying[idxItem] == resIdx) {
-                        if (m_director.m_needs[charIdx].Count > 0 && m_director.m_needs[charIdx][0].idx == resIdx)
-                        {
-                            m_director.DropNeed(charIdx,idxItem);
-                        }
-                        m_inventory[charIdx][resIdx].amount++;
-                        m_playerCarrying.RemoveAt(idxItem);
-                        m_traderPopup.GetComponent<AudioSource>().clip = m_traderPopup.m_dropItem;
-                        m_traderPopup.GetComponent<AudioSource>().Play();
-                        return;
-                    }
-                }
 
-            }
         }
-
         
     }
     
+    public void DropItem( Vector2 _input)
+    {
+        if (m_playerCarrying.Count > 0)
+        {
+            int charIdx = (int)_input.x;
+            int resIdx = (int)_input.y;
+
+            for (int idxItem = m_playerCarrying.Count - 1; idxItem > 0; idxItem--)
+            {
+                if (m_playerCarrying[idxItem] == resIdx) { 
+                    m_inventory[charIdx][resIdx].amount++;
+                    m_playerCarrying.RemoveAt(idxItem);
+                    return;
+                }
+            }
+
+        }
+        
+    }
 
     void Update()
     {
         
     }
 }
-
-public class Resource
-{
-    public string name;
-    public float amount;
-    // copy constructor
-    public Resource(Resource _previousResource)
-    {
-        name = _previousResource.name;
-        amount = _previousResource.amount;
-    }
-    public Resource(string _name, float _amount)
-    {
-        name = _name;
-        amount = _amount;
-    }
-}
-
