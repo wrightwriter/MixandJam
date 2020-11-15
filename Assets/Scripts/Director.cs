@@ -57,7 +57,7 @@ public class Director : MonoBehaviour
     }
     public void DropNeed(int _charIdx,int _idxItem) { 
         m_needs[_charIdx][0].cnt--;
-        if (m_needs[_charIdx][0].cnt == 0)
+        if (true || m_needs[_charIdx][0].cnt == 0)
         {
             m_needs[_charIdx].Clear();
             m_notificationHandler.SendNotification(_charIdx, "Yo thanks bro");
@@ -109,6 +109,7 @@ public class Director : MonoBehaviour
                     (int)( (1 - m_difficulty) * (1.0f + UnityEngine.Random.Range(0,4f)) )
                 ) * 30.0f;
             m_needs[idxChar].Add(new Need(idxResource,amount, (int)m_brain.m_inventory[idxChar][idxResource].amount,time));
+            m_notificationHandler.SendNotification(idxChar, "Hey, I need these things");
         }
 
     }
@@ -126,8 +127,8 @@ public class Director : MonoBehaviour
         float phaseDdiff = 1.0f;
         float t = Time.time;
         m_difficulty = Mathf.Lerp(phaseAdiff,phaseBdiff, Mathf.Lerp(0,1, (Time.time - phaseAtime)/(phaseBtime - phaseAtime)));
-        m_difficulty = Mathf.Lerp(m_difficulty,phaseCdiff, Mathf.Lerp(0,1, (Time.time - phaseAtime - phaseBtime)/(phaseBtime - phaseCtime)));
-        m_difficulty = Mathf.Lerp(m_difficulty,phaseDdiff, Mathf.Lerp(0,1, (Time.time - phaseAtime - phaseBtime - phaseCtime)/(phaseCtime - phaseDtime)));
+        m_difficulty = Mathf.Lerp(m_difficulty,phaseCdiff, Mathf.Lerp(0,1, (Time.time - phaseAtime - phaseBtime)/(phaseCtime - phaseBtime)));
+        m_difficulty = Mathf.Lerp(m_difficulty,phaseDdiff, Mathf.Lerp(0,1, (Time.time - phaseAtime - phaseBtime - phaseCtime)/(phaseDtime - phaseCtime)));
     }
 
     void Update()
