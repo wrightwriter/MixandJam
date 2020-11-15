@@ -48,6 +48,7 @@ public class Brain : MonoBehaviour
     };
     [System.NonSerialized] public List<List<Resource>> m_inventory = new List<List<Resource>>();
     [System.NonSerialized] public List<float> m_velocity = new List<float>();
+    [System.NonSerialized] public List<int> m_needs = new List<int>();
 
     public List<GameObject> m_traders;
     public List<int> m_playerCarrying;

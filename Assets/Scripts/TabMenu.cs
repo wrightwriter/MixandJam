@@ -6,6 +6,8 @@ public class TabMenu : MonoBehaviour
 {
     public Brain m_brain;
     public List<GameObject> m_resourceBoxes;
+    public List<GameObject> m_speechBubbles;
+    public List<Sprite> m_resourceSprites;
     Canvas m_canvas;
     void Start()
     {
@@ -37,6 +39,11 @@ public class TabMenu : MonoBehaviour
                 ResourceFourthBox.SetActive(m_brain.m_inventory[idxCharacter][idxResourceRow].amount > 4.0f);
 
             }
+        }
+        for (int idxCharacter = 0; idxCharacter < 8; idxCharacter++)
+        {
+            GameObject SpeechBubble = m_speechBubbles[idxCharacter];
+            if ()
         }
 
     }
