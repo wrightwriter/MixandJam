@@ -43,7 +43,10 @@ public class TabMenu : MonoBehaviour
         for (int idxCharacter = 0; idxCharacter < 8; idxCharacter++)
         {
             GameObject SpeechBubble = m_speechBubbles[idxCharacter];
+<<<<<<< HEAD
             //if ()
+=======
+>>>>>>> 2a751cc1e0d476882b90621ddf2b0ef8c115011c
         }
 
     }
