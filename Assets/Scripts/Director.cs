@@ -55,12 +55,23 @@ public class Director : MonoBehaviour
         Difficulty();
         GetNewNeeds();
     }
-    public void DropNeed(int _charIdx,int _idxItem) { 
+    public void DropNeed(int _charIdx,int _idxItem) {
         m_needs[_charIdx][0].cnt--;
         if (true || m_needs[_charIdx][0].cnt == 0)
         {
             m_needs[_charIdx].Clear();
-            m_notificationHandler.SendNotification(_charIdx, "Yo thanks bro");
+            string resourceName = Brain.resources[_idxItem].name;
+            GameObject.FindGameObjectWithTag("Notifications").GetComponent<NotificationHandler>().SendNotification(_charIdx, new string[]{
+                "Psst... thanks for the " + resourceName + ".",
+                "You finally brought the " +  resourceName +"! Be faster next time if you want me to stay in business.",
+                "Thanks for bringing me " + resourceName +" pilot!",
+                "Your hard work is appreciated, Compatriot.",
+                "Finally, that took you all day. Nice " + resourceName,
+                "Thanks! I knew you could do it, kid.",
+                "Thank you for stopping by.",
+                "Thanks, I owe you one."
+            }[_charIdx]);
+
         }
     }
     void UpdateNeeds() { 
@@ -68,7 +79,15 @@ public class Director : MonoBehaviour
         {
             if (m_needs[idxChar].Count > 0 && m_brain.m_charAlive[idxChar])
             {
-                m_needs[idxChar][0].time += 1;
+                if (m_needs[idxChar][0].time <= 0)
+                {
+                    m_brain.KillChar(idxChar);
+                }
+                else
+                {
+                    m_needs[idxChar][0].time -= 1;
+
+                }
             }
         }
     }
@@ -98,18 +117,45 @@ public class Director : MonoBehaviour
         int idxChar = Extensions.randomExclude(0,8,unavailableCharacters);
         if (shouldAddNeed && idxChar < 8)
         {
+            if (!unavailableCharacters.Contains(idxChar))
+            {
+                unavailableCharacters.Add(idxChar);
+            }
             int randomA = Extensions.randomExclude(0,8,unavailableCharacters);
             int randomB = Extensions.randomExclude(0,8,unavailableCharacters);
             Resource A = m_brain.m_inventory[idxChar][randomA];
             Resource B = m_brain.m_inventory[idxChar][randomA];
             int idxResource = A.amount < B.amount ? randomA : randomB;
-            int amount = UnityEngine.Random.Range(0, 3); // TODO difficulty balancing
+            int amount = UnityEngine.Random.Range(1, 3); // TODO difficulty balancing
 
+            /*
             float time = UnityEngine.Random.Range(1, 
                     (int)( (1 - m_difficulty) * (1.0f + UnityEngine.Random.Range(0,4f)) )
-                ) * 30.0f;
-            m_needs[idxChar].Add(new Need(idxResource,amount, (int)m_brain.m_inventory[idxChar][idxResource].amount,time));
-            m_notificationHandler.SendNotification(idxChar, "Hey, I need these things");
+                ) * 10.0f;
+            */
+            /*
+            float time = UnityEngine.Random.Range(1, 
+                    1 + (int)( (1 - m_difficulty) * (1.0f + UnityEngine.Random.Range(0,4f - UnityEngine.Random.Range(1.0f,3.0f,) )) )
+                ) * 10.0f;
+            */
+            float timeToFinish = (int)UnityEngine.Random.Range(1f, 1f + (
+                (1.0f-m_difficulty)*UnityEngine.Random.Range(0.5f,2.0f*UnityEngine.Random.Range(0.75f - m_difficulty*0.4f,1.5f - m_difficulty*1.0f))
+                ))*(37.0f*(1f - m_difficulty*0.0f));
+
+            m_needs[idxChar].Add(new Need(idxResource,amount, (int)m_brain.m_inventory[idxChar][idxResource].amount,timeToFinish));
+
+
+            string resourceName = Brain.resources[idxResource].name;
+            GameObject.FindGameObjectWithTag("Notifications").GetComponent<NotificationHandler>().SendNotification(idxChar, new string[]{
+                "Psst... can you get me some " + resourceName + "?",
+                "Bring me some " +  resourceName + " please! You wouldn't want me to lose out on profits. ",
+                "Heya! I need some more" + resourceName + "to operate my peanut stand." ,
+                "Deliver a few " + resourceName + " for me, Compatriot.",
+                "Deliver me some " + resourceName + ".",
+                "Get me some" + resourceName + "as soon as you can, I believe in ya kid.",
+                "Can you get me some " + resourceName + ", sweetie?",
+                "Bring me some " + resourceName + ", would ya?"
+            }[idxChar]);
         }
 
     }
@@ -117,8 +163,8 @@ public class Director : MonoBehaviour
     void Difficulty()
     {
         float phaseAtime = 0.0f;
-        float phaseBtime = 100.0f;
-        float phaseCtime = 200.0f;
+        float phaseBtime = 50.0f;
+        float phaseCtime = 80.0f;
         float phaseDtime = 400.0f;
 
         float phaseAdiff = 0.1f;

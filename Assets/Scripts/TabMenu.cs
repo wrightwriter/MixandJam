@@ -25,12 +25,10 @@ public class TabMenu : MonoBehaviour
     {
         if (Input.GetKeyDown("tab"))
         {
-            m_audioSource.clip = m_clipOpen;
-            m_audioSource.Play();
+            m_audioSource.PlayOneShot(m_clipOpen);
         } else if (Input.GetKeyUp("tab"))
         {
-            m_audioSource.clip = m_clipClose;
-            m_audioSource.Play();
+            m_audioSource.PlayOneShot(m_clipClose);
         }
 
     }
@@ -66,12 +64,15 @@ public class TabMenu : MonoBehaviour
             {
                 SpeechBubble.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,1f);
 
-                Image image = SpeechBubble.transform.GetChild(0).GetComponent<Image>();
-                TMPro.TextMeshProUGUI text = SpeechBubble.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>();
+                TMPro.TextMeshProUGUI textAmount = SpeechBubble.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
+                
+                Image image = SpeechBubble.transform.GetChild(1).GetComponent<Image>();
+                TMPro.TextMeshProUGUI textTime = SpeechBubble.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
 
                 Need need = m_director.m_needs[idxCharacter][0];
+                textAmount.text = need.cnt.ToString() + "";
                 image.sprite = m_resourceSprites[need.idx];
-                text.text = need.time.ToString() + "s";
+                textTime.text = ((int)need.time).ToString() + "s";
                 
             } else
             {

@@ -755,6 +755,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3882584262228588527, guid: fbd05b1a42c168b469a0e27eec1f64ef, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f86982d4c9ed0b3419393f8ad147cf0a, type: 3}
     - target: {fileID: 3982217343477131081, guid: fbd05b1a42c168b469a0e27eec1f64ef, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
