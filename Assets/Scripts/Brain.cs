@@ -62,6 +62,7 @@ public class Brain : MonoBehaviour
     }
     void InitializeResources() { 
         for (int idxTrader = 0; idxTrader < 8; idxTrader++) {
+
             List<Resource> resourceCopy = new List<Resource>(resources.Count);
             resources.ForEach((item) =>
             {
@@ -74,6 +75,8 @@ public class Brain : MonoBehaviour
             for (int idxResource = 0; idxResource < 8; idxResource++) {
                 m_inventory[idxTrader][idxResource].amount = UnityEngine.Random.Range(0, 4.0f);
             }
+
+            m_needs[idxTrader] = 0;
         }
 
 
