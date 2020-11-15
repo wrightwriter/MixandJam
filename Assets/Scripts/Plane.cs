@@ -44,21 +44,21 @@ public class Plane : MonoBehaviour
         {
             transform.Rotate(new Vector3(0, 0, -m_input.x * (m_input.y != 0 ? 100f : 60f) * Time.fixedDeltaTime));
 
-            if (m_isGrounded)
-            {
-                gameObject.GetComponent<SpriteRenderer>().sprite = sprites[2];
-                minimap_plane.GetComponent<SpriteRenderer>().sprite = sprites[2];
-            }
-            else if (transform.eulerAngles.z >= 245 && transform.eulerAngles.z <= 295 || transform.eulerAngles.z >= 65 && transform.eulerAngles.z <= 115)
-            {
-                gameObject.GetComponent<SpriteRenderer>().sprite = sprites[1];
-                minimap_plane.GetComponent<SpriteRenderer>().sprite = sprites[1];
-            }
-            else
-            {
-                gameObject.GetComponent<SpriteRenderer>().sprite = sprites[0];
-                minimap_plane.GetComponent<SpriteRenderer>().sprite = sprites[0];
-            }
+            //if (m_isGrounded)
+            //{
+            //    gameObject.GetComponent<SpriteRenderer>().sprite = sprites[2];
+            //    minimap_plane.GetComponent<SpriteRenderer>().sprite = sprites[2];
+            //}
+            //else if (transform.eulerAngles.z >= 245 && transform.eulerAngles.z <= 295 || transform.eulerAngles.z >= 65 && transform.eulerAngles.z <= 115)
+            //{
+            //    gameObject.GetComponent<SpriteRenderer>().sprite = sprites[1];
+            //    minimap_plane.GetComponent<SpriteRenderer>().sprite = sprites[1];
+            //}
+            //else
+            //{
+            //    gameObject.GetComponent<SpriteRenderer>().sprite = sprites[0];
+            //    minimap_plane.GetComponent<SpriteRenderer>().sprite = sprites[0];
+            //}
 
             transform.GetComponent<SpriteRenderer>().flipY = (transform.eulerAngles.z <= 270 && transform.eulerAngles.z >= 90);
             minimap_plane.GetComponent<SpriteRenderer>().flipY = (transform.eulerAngles.z <= 270 && transform.eulerAngles.z >= 90);
@@ -98,7 +98,7 @@ public class Plane : MonoBehaviour
         }
 
         m_isGrounded = false;
-        m_isGrounded = Physics2D.OverlapCircle(m_groundCheck.transform.position, 0.6f, LayerMask.GetMask("platforms"));
+        m_isGrounded = Physics2D.OverlapCircle(m_groundCheck.transform.position, 10f, LayerMask.GetMask("platforms"));
 
         GetComponent<AudioSource>().volume = Mathf.Lerp(GetComponent<AudioSource>().volume, Mathf.Abs(m_input.y), 2.0f*Time.fixedDeltaTime  ) ;
     }
