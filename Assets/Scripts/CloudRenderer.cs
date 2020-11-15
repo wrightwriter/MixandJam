@@ -22,7 +22,7 @@ public class CloudRenderer : MonoBehaviour
             if (cloud_objects[i] != null)
             {
                 cloud_objects[i].transform.position = new Vector3(cloud_objects[i].transform.position.x - Time.deltaTime * cloud_objects[i].transform.localScale.x, cloud_objects[i].transform.position.y, cloud_objects[i].transform.position.z);
-                if (cloud_objects[i].transform.position.x < -29)
+                if (cloud_objects[i].transform.position.x < -45)
                 {
                     Destroy(cloud_objects[i]);
                     cloud_objects.Remove(cloud_objects[i]);
