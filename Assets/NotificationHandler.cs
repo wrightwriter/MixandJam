@@ -30,8 +30,7 @@ public class NotificationHandler : MonoBehaviour
 
     private void Start()
     {
-        minimap_image.texture.width = (int)(Screen.width * 0.15f);
-        minimap_image.texture.height = (int)(Screen.height * 0.15f);
+        minimap_image.transform.localScale = new Vector3((int)(Screen.width * 0.15f)/10.7f, (int)(Screen.height * 0.15f)/6,1);
         notifs = new List<Notification>();
     }
 
