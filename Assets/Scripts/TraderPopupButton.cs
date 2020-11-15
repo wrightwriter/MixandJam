@@ -4,6 +4,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+
+public class TraderPopupMessage
+{
+    public int traderIdx;
+    public int resourceIdx;
+    public bool success = false;
+    public string pickupOrDrop = "pickup";
+}
+
 public class TraderPopupButton : MonoBehaviour, IPointerClickHandler
 {
     public int m_resourceIdx;
@@ -22,14 +31,22 @@ public class TraderPopupButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        TraderPopupMessage message = new TraderPopupMessage();
+        message.resourceIdx = m_resourceIdx;
+        message.traderIdx = m_traderPopup.m_currIdx;
+
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            m_brain.SendMessage("CarryItem", new Vector2(m_traderPopup.m_currIdx,m_resourceIdx)); 
+            message.pickupOrDrop = "pickup";
         } else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            m_brain.SendMessage("DropItem", new Vector2(m_traderPopup.m_currIdx,m_resourceIdx)); 
-
+            message.pickupOrDrop = "drop";
+        } else
+        {
+            return;
         }
+
+        m_brain.SendMessage("PickupOrDropItemFromTrader", message); 
     }
 
     // Update is called once per frame
