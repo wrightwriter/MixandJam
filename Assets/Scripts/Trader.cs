@@ -26,6 +26,7 @@ public class Trader : MonoBehaviour
             } else if (!plane.m_isGrounded && m_traderPopup.GetComponent<CanvasScaler>().scaleFactor != 0)
             {
                 m_traderPopup.GetComponent<TraderPopup>().Hide();
+
             }
         }
 
